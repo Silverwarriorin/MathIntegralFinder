@@ -1,5 +1,5 @@
 from re import sub
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 import numpy as np
 from progressbar import progressbar
 
@@ -10,13 +10,17 @@ from time import sleep
 
 # Creating array for bounds
 
-left_bound = float(input("Left Bound? "))
-right_bound = float(input("Right Bound? "))
+left_bound = int(input("Left Bound? "))
+right_bound = int(input("Right Bound? "))
+print(left_bound)
+print(right_bound)
 x_axis = []
 
 print(Fore.CYAN + "\n\n\nGenerating X Axis" + Fore.GREEN)
-for i in progressbar(range(int(np.absolute(int(left_bound))), int(np.absolute(int(left_bound)) + right_bound), 1)):
-    x_axis.append(left_bound+i)
+ind = 0
+for i in range(left_bound, right_bound+1, 1):
+    x_axis.append(left_bound + ind)
+    ind += 1
     print(i)
 print(x_axis)
 
