@@ -1,12 +1,6 @@
-from re import sub
 from matplotlib import pyplot as plt
 import numpy as np
-from progressbar import progressbar
 
-import colorama
-from colorama import Fore, Style
-
-from time import sleep
 
 # Getting bounds
 
