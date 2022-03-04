@@ -25,6 +25,7 @@ for i in range(left_bound, right_bound+1, 1):
 
 # PreComputing Values
 equation_string = input("Equation? ")
+partitions = input("Partitions? ")
 plt.title("Graph Output")
 plt.xlabel("x")
 plt.ylabel("y")
@@ -46,7 +47,7 @@ print(Fore.CYAN + "\n\n\nGenerating Graph" + Fore.GREEN)
 # Calculate stuff 
 
 f = lambda x : eval(equation_string)
-a = 0; b = 5; N = 10
+a = left_bound; b = right_bound; N = partitions
 n = 10 # Use n*N+1 points to plot the function smoothly
 
 x = np.linspace(a,b,N+1)
