@@ -8,43 +8,20 @@ from colorama import Fore, Style
 
 from time import sleep
 
-# Creating array for bounds
+# Getting bounds
 
 left_bound = int(input("Left Bound? "))
 right_bound = int(input("Right Bound? "))
 
-x_axis = []
 
-print(Fore.CYAN + "\n\n\nGenerating X Axis" + Fore.GREEN)
-ind = 0
-for i in range(left_bound, right_bound+1, 1):
-    x_axis.append(left_bound + ind)
-    ind += 1
-
-
-
-# PreComputing Values
+# Getting Equation and number of divisions
 equation_string = input("Equation? ")
-partitions = input("Partitions? ")
-plt.title("Graph Output")
-plt.xlabel("x")
-plt.ylabel("y")
-
-x_value = []
-y_value = []
-
-print(Fore.CYAN + "\n\n\nGenerating Graph" + Fore.GREEN)
+partitions = int(input("Partitions? "))
 
 
 
 
-
-
-
-
-
-
-# Calculate stuff 
+# Calculate all the points 
 
 f = lambda x : eval(equation_string)
 a = left_bound; b = right_bound; N = partitions
@@ -58,28 +35,68 @@ Y = f(X)
 
 plt.figure(figsize=(15,5))
 
-plt.subplot(1,3,1)
+
+dx = (b - a)/N
+x_left = np.linspace(a,b-dx,N)
+x_midpoint = np.linspace(dx/2,b - dx/2,N)
+x_right = np.linspace(dx,b,N)
+h = (b - a) / (n - 1)
+
+
+x_mid = (x[:-1] + x[1:])/2
+mid = np.sum(f(x_mid)*dx)
+
+
+
+plt.subplot(1,4,1)
+plt.grid(True, color = 'black', linestyle = '--', linewidth = 1)
 plt.plot(X,Y,'b')
 x_left = x[:-1] # Left endpoints
 y_left = y[:-1]
 plt.plot(x_left,y_left,'b.',markersize=10)
 plt.bar(x_left,y_left,width=(b-a)/N,alpha=0.2,align='edge',edgecolor='b')
-plt.title('Left Riemann Sum, N = {}'.format(N))
+j = np.sum(f(x_left) * dx)
+plt.title('Left Riemann Sum, Ans ≈ {0:.2f}'.format(j))
 
-plt.subplot(1,3,2)
+plt.subplot(1,4,2)
+plt.grid(True, color = 'black', linestyle = '--', linewidth = 1)
 plt.plot(X,Y,'b')
 x_mid = (x[:-1] + x[1:])/2 # Midpoints
 y_mid = f(x_mid)
 plt.plot(x_mid,y_mid,'b.',markersize=10)
 plt.bar(x_mid,y_mid,width=(b-a)/N,alpha=0.2,edgecolor='b')
-plt.title('Midpoint Riemann Sum, N = {}'.format(N))
+plt.title('Midpoint Riemann Sum, Ans ≈ {0:.2f}'.format(mid))
 
-plt.subplot(1,3,3)
+plt.subplot(1,4,3)
+plt.grid(True, color = 'black', linestyle = '--', linewidth = 1)
 plt.plot(X,Y,'b')
 x_right = x[1:] # Left endpoints
 y_right = y[1:]
 plt.plot(x_right,y_right,'b.',markersize=10)
 plt.bar(x_right,y_right,width=-(b-a)/N,alpha=0.2,align='edge',edgecolor='b')
-plt.title('Right Riemann Sum, N = {}'.format(N))
+right_riemann_sum = np.sum(f(x_right) * dx)
+plt.title('Right Riemann Sum, Ans ≈ {0:.2f}'.format(right_riemann_sum))
+
+plt.subplot(1,4,4)
+plt.grid(True, color = 'black', linestyle = '--', linewidth = 1)
+plt.plot(X,Y,'b')
+plt.plot(x_right,y_right,'b.',markersize=10)
+for i in range(N):
+    xs = [x[i],x[i],x[i+1],x[i+1]]
+    ys = [0,f(x[i]),f(x[i+1]),0]
+    plt.fill(xs,ys,'b',edgecolor='b',alpha=0.2)
+
+h = float(b - a) / n
+s = 0.0
+s += f(a)/2.0
+for i in range(1, n):
+    s += f(a + i*h)
+s += f(b)/2.0
+ans =  s * h
+plt.title('Trapezoid Rule, N ≈ {0:.2f}'.format(ans))
 
 plt.show()
+
+
+
+
