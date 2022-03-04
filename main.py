@@ -58,6 +58,9 @@ plt.bar(x_left,y_left,width=(b-a)/N,alpha=0.2,align='edge',edgecolor='b')
 j = np.sum(f(x_left) * dx)
 plt.title('Left Riemann Sum, Ans ≈ {0:.2f}'.format(j))
 
+
+
+
 plt.subplot(1,4,2)
 plt.grid(True, color = 'black', linestyle = '--', linewidth = 1)
 plt.plot(X,Y,'b')
@@ -66,6 +69,9 @@ y_mid = f(x_mid)
 plt.plot(x_mid,y_mid,'b.',markersize=10)
 plt.bar(x_mid,y_mid,width=(b-a)/N,alpha=0.2,edgecolor='b')
 plt.title('Midpoint Riemann Sum, Ans ≈ {0:.2f}'.format(mid))
+
+
+
 
 plt.subplot(1,4,3)
 plt.grid(True, color = 'black', linestyle = '--', linewidth = 1)
@@ -77,9 +83,13 @@ plt.bar(x_right,y_right,width=-(b-a)/N,alpha=0.2,align='edge',edgecolor='b')
 right_riemann_sum = np.sum(f(x_right) * dx)
 plt.title('Right Riemann Sum, Ans ≈ {0:.2f}'.format(right_riemann_sum))
 
+
+
+
 plt.subplot(1,4,4)
 plt.grid(True, color = 'black', linestyle = '--', linewidth = 1)
 plt.plot(X,Y,'b')
+
 plt.plot(x_right,y_right,'b.',markersize=10)
 for i in range(N):
     xs = [x[i],x[i],x[i+1],x[i+1]]
