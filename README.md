@@ -1,0 +1,4 @@
+# MathIntegralFinder
+
+Requires numpy, matplotlib
+
