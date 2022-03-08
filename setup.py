@@ -48,8 +48,8 @@ keywords=[],
 
 # List project dependencies: 
 install_requires=[
-    '<matplotlib>',
-    '<numpy>'
+    'matplotlib',
+    'numpy'
 ],
 
 # https://pypi.org/classifiers/ 
